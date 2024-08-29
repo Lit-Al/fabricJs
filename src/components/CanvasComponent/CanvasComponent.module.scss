@@ -1,0 +1,8 @@
+.canvas_wrapper {
+  & > :global(.canvas-container) {
+    margin: 0 auto;
+    canvas {
+      border: 1px solid gray;
+    }
+  }
+}
