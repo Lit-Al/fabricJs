@@ -1,14 +1,16 @@
 import { Canvas, Triangle } from 'fabric';
 import { MutableRefObject } from 'react';
+import { getViewport } from './getViewport';
+import { baseFigireColor, baseFigureSize } from '../constants';
 
 export const addTriangle = (fabricRef: MutableRefObject<Canvas | null>) => {
-  const canvasWidth = fabricRef.current?.width || 0;
-  const canvasHeight = fabricRef.current?.height || 0;
-  
+  const { viewportLeft, viewportTop, viewportWidth, viewportHeight } =
+    getViewport(fabricRef);
+
   const circle = new Triangle({
-    fill: 'blue',
-    top: Math.random() * (canvasHeight - 150),
-    left: Math.random() * (canvasWidth - 150),
+    fill: baseFigireColor,
+    left: viewportLeft + Math.random() * (viewportWidth - baseFigureSize),
+    top: viewportTop + Math.random() * (viewportHeight - baseFigureSize),
   });
   fabricRef.current?.add(circle);
 };

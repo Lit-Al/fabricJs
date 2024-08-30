@@ -1,8 +1,12 @@
 .canvas_wrapper {
-  & > :global(.canvas-container) {
-    margin: 0 auto;
+  &--grab {
     canvas {
-      border: 1px solid gray;
+      cursor: grab !important;
+    }
+  }
+  &--grabbing {
+    canvas {
+      cursor: grabbing !important;
     }
   }
 }

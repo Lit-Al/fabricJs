@@ -1,16 +1,18 @@
 import { Canvas, Rect } from 'fabric';
 import { MutableRefObject } from 'react';
+import { getViewport } from './getViewport';
+import { baseFigireColor, baseFigureSize } from '../constants';
 
 export const addRectangle = (fabricRef: MutableRefObject<Canvas | null>) => {
-  const canvasWidth = fabricRef.current?.width || 0;
-  const canvasHeight = fabricRef.current?.height || 0;
+  const { viewportLeft, viewportTop, viewportWidth, viewportHeight } =
+    getViewport(fabricRef);
 
   const rect = new Rect({
-    top: Math.random() * (canvasHeight - 50),
-    left: Math.random() * (canvasWidth - 50),
+    left: viewportLeft + Math.random() * (viewportWidth - baseFigureSize),
+    top: viewportTop + Math.random() * (viewportHeight - baseFigureSize),
     width: 50,
     height: 50,
-    fill: 'red',
+    fill: baseFigireColor,
   });
 
   fabricRef.current?.add(rect);

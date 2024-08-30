@@ -1,13 +1,15 @@
 import { Canvas, IText } from 'fabric';
 import { MutableRefObject } from 'react';
+import { getViewport } from './getViewport';
+import { baseFigureSize } from '../constants';
 
 export const addText = (fabricRef: MutableRefObject<Canvas | null>) => {
-  const canvasWidth = fabricRef.current?.width || 0;
-  const canvasHeight = fabricRef.current?.height || 0;
+  const { viewportLeft, viewportTop, viewportWidth, viewportHeight } =
+    getViewport(fabricRef);
 
   const text = new IText('Hello, world!', {
-    top: Math.random() * (canvasHeight - 100),
-    left: Math.random() * (canvasWidth - 100),
+    left: viewportLeft + Math.random() * (viewportWidth - baseFigureSize),
+    top: viewportTop + Math.random() * (viewportHeight - baseFigureSize),
     fontSize: 24,
   });
   fabricRef.current?.add(text);

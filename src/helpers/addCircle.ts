@@ -1,15 +1,20 @@
 import { Canvas, Circle } from 'fabric';
 import { MutableRefObject } from 'react';
+import { getViewport } from './getViewport';
+import { baseFigireColor } from '../constants';
 
 export const addCircle = (fabricRef: MutableRefObject<Canvas | null>) => {
-  const canvasWidth = fabricRef.current?.width || 0;
-  const canvasHeight = fabricRef.current?.height || 0;
-  
+  const { viewportLeft, viewportTop, viewportWidth, viewportHeight } =
+    getViewport(fabricRef);
+
+  const radius = 35;
+
   const circle = new Circle({
-    radius: 20,
-    fill: 'green',
-    top: Math.random() * (canvasHeight - 150),
-    left: Math.random() * (canvasWidth - 150),
+    radius,
+    fill: baseFigireColor,
+    left: viewportLeft + Math.random() * (viewportWidth - 2 * radius),
+    top: viewportTop + Math.random() * (viewportHeight - 2 * radius),
   });
+
   fabricRef.current?.add(circle);
 };
