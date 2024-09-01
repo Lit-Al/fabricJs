@@ -1,3 +1,2 @@
-export const baseFigireColor = '#5a2acb';
-export const baseCircleRadius = 35;
+export const baseCircleRadius = 50;
 export const baseFigureSize = 100;

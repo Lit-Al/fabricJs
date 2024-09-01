@@ -3,7 +3,7 @@ import { MutableRefObject } from "react";
 import { getViewport } from "./getViewport";
 import { baseFigureSize } from "../constants";
 
-export const addRectangle = (
+export const addSquare = (
   fabricRef: MutableRefObject<Canvas | null>,
   color: string
 ) => {
@@ -14,7 +14,7 @@ export const addRectangle = (
     left: viewportLeft + Math.random() * (viewportWidth - baseFigureSize),
     top: viewportTop + Math.random() * (viewportHeight - baseFigureSize),
     width: baseFigureSize,
-    height: baseFigureSize / 2,
+    height: baseFigureSize,
     fill: color,
   });
 
