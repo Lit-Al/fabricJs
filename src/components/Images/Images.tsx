@@ -8,38 +8,57 @@ interface IImages {
 }
 
 export const Images: FC<IImages> = ({ styles }) => {
-  const { fabricRef } = useContext(CanvasContext);
+  const { fabricRef, setRedoHistory, saveCanvasState, addedListeners } =
+    useContext(CanvasContext);
 
   return (
     <section className={styles.sidebar__buttons}>
       <ImageButton
         className={styles.sidebar__icon_button}
         fabricRef={fabricRef}
-        src="/react.svg"
+        src="/fabricJs/react.svg"
+        setRedoHistory={setRedoHistory}
+        addedListeners={addedListeners}
+        saveCanvasState={saveCanvasState}
       />
       <ImageButton
         className={styles.sidebar__icon_button}
         fabricRef={fabricRef}
-        src="/maxa.ico"
+        src="/fabricJs/maxa.ico"
+        setRedoHistory={setRedoHistory}
+        addedListeners={addedListeners}
+        saveCanvasState={saveCanvasState}
       />
       <ImageButton
         className={styles.sidebar__icon_button}
         fabricRef={fabricRef}
-        src="/cat.jpg"
+        src="/fabricJs/cat.jpg"
+        setRedoHistory={setRedoHistory}
+        addedListeners={addedListeners}
+        saveCanvasState={saveCanvasState}
       />
       <ImageButton
         className={styles.sidebar__icon_button}
         fabricRef={fabricRef}
-        src="/pikachu.png"
+        src="/fabricJs/pikachu.png"
+        setRedoHistory={setRedoHistory}
+        addedListeners={addedListeners}
+        saveCanvasState={saveCanvasState}
       />
       <ImageButton
         className={styles.sidebar__icon_button}
         fabricRef={fabricRef}
-        src="/doggy.jpg"
+        src="/fabricJs/doggy.jpg"
+        setRedoHistory={setRedoHistory}
+        addedListeners={addedListeners}
+        saveCanvasState={saveCanvasState}
       />
       <ImageUploadButton
         className={styles.sidebar__icon_button}
         fabricRef={fabricRef}
+        setRedoHistory={setRedoHistory}
+        addedListeners={addedListeners}
+        saveCanvasState={saveCanvasState}
       />
     </section>
   );

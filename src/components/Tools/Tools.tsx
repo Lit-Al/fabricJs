@@ -28,6 +28,7 @@ export const Tools: FC<ITools> = ({ styles }) => {
     fabricRef,
     setCanvasSvg,
     downloadImage,
+    addedListeners,
   } = useContext(CanvasContext);
 
   useEffect(() => {
@@ -37,12 +38,15 @@ export const Tools: FC<ITools> = ({ styles }) => {
       // Устанавливаем флаг isObjectEditing в true при изменении объекта на холсте
       fabricRef.current.on("object:moving", () => {
         isObjectEditing = true;
+        setRedoHistory([]);
       });
       fabricRef.current.on("object:rotating", () => {
         isObjectEditing = true;
+        setRedoHistory;
       });
       fabricRef.current.on("object:scaling", () => {
         isObjectEditing = true;
+        setRedoHistory([]);
       });
 
       // Если объект был изменен, сохраняем текущее состояние холста в историю изменений
@@ -53,9 +57,16 @@ export const Tools: FC<ITools> = ({ styles }) => {
           saveCanvasState();
         }
       });
-      fabricRef.current.on("object:added", saveCanvasState);
+      // Добавляем только один слушатель события object:added
+      if (addedListeners === undefined || !addedListeners.length) {
+        fabricRef.current.on("object:added", saveCanvasState);
+      }
+      // Если слушателей события object:added по ошибке 2, удаляем последний
+      if (addedListeners) {
+        addedListeners.pop();
+      }
     }
-  }, []);
+  }, [fabricRef.current]);
 
   return (
     <>

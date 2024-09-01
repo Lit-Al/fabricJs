@@ -1,4 +1,5 @@
 {
+  "homepage": "https://lit-al.github.io/fabricJs/",
   "name": "my-vite-react-ts-project",
   "private": true,
   "version": "0.0.0",
@@ -7,7 +8,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@types/react-color": "^3.0.12",

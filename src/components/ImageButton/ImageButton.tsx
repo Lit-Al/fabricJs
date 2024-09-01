@@ -1,23 +1,32 @@
-import { Canvas, FabricImage } from "fabric";
+import { Canvas, FabricImage, FabricObject } from "fabric";
 import clsx from "clsx";
 
 import styles from "./ImageButton.module.scss";
 import { getViewport } from "../../helpers/getViewport";
-import { FC } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
+import { addEventAdded } from "../../helpers";
 
 interface IImageButton {
   fabricRef: React.MutableRefObject<Canvas | null>;
   src: string;
   className?: string;
+  setRedoHistory: Dispatch<SetStateAction<FabricObject[][]>>;
+  addedListeners: [] | object[];
+  saveCanvasState: () => void;
 }
 
 export const ImageButton: FC<IImageButton> = ({
   fabricRef,
   src,
   className,
+  setRedoHistory,
+  addedListeners,
+  saveCanvasState,
 }) => {
   const handleAddImage = async () => {
     if (fabricRef.current) {
+      setRedoHistory([]);
+      addEventAdded(fabricRef, addedListeners, saveCanvasState);
       const { viewportLeft, viewportTop, viewportWidth, viewportHeight } =
         getViewport(fabricRef);
       const img = await FabricImage.fromURL(src);

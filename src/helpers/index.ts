@@ -10,3 +10,4 @@ export * from './handleDeleteCanvasElement';
 export * from './handleResetZoomCanvas';
 export * from './handleSaveCanvas';
 export * from './areEqual';
+export * from './addEventAdded';

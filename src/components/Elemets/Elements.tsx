@@ -9,6 +9,7 @@ import {
   addSquare,
   addText,
   handleCanvasColorChange,
+  addEventAdded,
 } from "../../helpers";
 import { DrawButton } from "../DrawButton";
 import { FC, useContext } from "react";
@@ -20,33 +21,60 @@ interface IElements {
 }
 
 export const Elements: FC<IElements> = ({ styles }) => {
-  const { fabricRef, selectedColor, setSelectedColor, saveCanvasState } =
-    useContext(CanvasContext);
+  const {
+    fabricRef,
+    selectedColor,
+    setSelectedColor,
+    saveCanvasState,
+    setRedoHistory,
+    addedListeners,
+  } = useContext(CanvasContext);
+
   return (
     <>
-      <img className={styles.sidebar__logo} src="/maxa.ico" alt="MAXA" />
+      <img
+        className={styles.sidebar__logo}
+        src="/fabricJs/maxa.ico"
+        alt="MAXA"
+      />
       <section className={styles.sidebar__buttons}>
         <button
           className={styles.sidebar__icon_button}
-          onClick={() => addCircle(fabricRef, selectedColor)}
+          onClick={() => {
+            setRedoHistory([]);
+            addEventAdded(fabricRef, addedListeners, saveCanvasState);
+            addCircle(fabricRef, selectedColor);
+          }}
         >
           <FaCircle size={24} />
         </button>
         <button
           className={styles.sidebar__icon_button}
-          onClick={() => addTriangle(fabricRef, selectedColor)}
+          onClick={() => {
+            setRedoHistory([]);
+            addEventAdded(fabricRef, addedListeners, saveCanvasState);
+            addTriangle(fabricRef, selectedColor);
+          }}
         >
           <BsTriangleFill size={24} />
         </button>
         <button
           className={styles.sidebar__icon_button}
-          onClick={() => addRectangle(fabricRef, selectedColor)}
+          onClick={() => {
+            setRedoHistory([]);
+            addEventAdded(fabricRef, addedListeners, saveCanvasState);
+            addRectangle(fabricRef, selectedColor);
+          }}
         >
           <RiRectangleFill size={24} />
         </button>
         <button
           className={styles.sidebar__icon_button}
-          onClick={() => addSquare(fabricRef, selectedColor)}
+          onClick={() => {
+            setRedoHistory([]);
+            addEventAdded(fabricRef, addedListeners, saveCanvasState);
+            addSquare(fabricRef, selectedColor);
+          }}
         >
           <RiSquareFill size={24} />
         </button>
@@ -56,7 +84,11 @@ export const Elements: FC<IElements> = ({ styles }) => {
         />
         <button
           className={styles.sidebar__icon_button}
-          onClick={() => addText(fabricRef, selectedColor)}
+          onClick={() => {
+            setRedoHistory([]);
+            addEventAdded(fabricRef, addedListeners, saveCanvasState);
+            addText(fabricRef, selectedColor);
+          }}
         >
           <MdOutlineTextIncrease size={24} />
         </button>

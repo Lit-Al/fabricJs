@@ -25,6 +25,7 @@ interface ICanvasContext {
   selectedColor: string;
   setSelectedColor: Dispatch<SetStateAction<string>>;
   downloadImage: () => void;
+  addedListeners: [] | object[];
 }
 
 export const CanvasContext = createContext<ICanvasContext>({
@@ -42,6 +43,7 @@ export const CanvasContext = createContext<ICanvasContext>({
   selectedColor: "",
   setSelectedColor: () => {},
   downloadImage: () => {},
+  addedListeners: [],
 });
 
 interface CanvasProviderProps {
@@ -60,6 +62,8 @@ export const CanvasProvider: FC<CanvasProviderProps> = ({
   const [selectedColor, setSelectedColor] = useState("#307BDF");
   const savedObjects = JSON.parse(localStorage.getItem("canvas") ?? "{}").json
     ?.objects;
+  // Слушатели событий added
+  const addedListeners = fabricRef.current?.__eventListeners["object:added"];
 
   // Функция для скачивания изображения с холста в формате PNG
   const downloadImage = () => {
@@ -98,7 +102,7 @@ export const CanvasProvider: FC<CanvasProviderProps> = ({
   // Функция для отмены последнего изменения на холсте
   const undo = () => {
     if (fabricRef.current && history.length > 0) {
-      if (history.length === 1 && savedObjects) {
+      if (history.length === 1 && areEqual(history[0], savedObjects)) {
         return;
       }
       clear();
@@ -162,6 +166,7 @@ export const CanvasProvider: FC<CanvasProviderProps> = ({
         selectedColor,
         setSelectedColor,
         downloadImage,
+        addedListeners,
       }}
     >
       {children}
