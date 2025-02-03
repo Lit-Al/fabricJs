@@ -1,0 +1,12 @@
+.canvas_wrapper {
+  &--grab {
+    canvas {
+      cursor: grab !important;
+    }
+  }
+  &--grabbing {
+    canvas {
+      cursor: grabbing !important;
+    }
+  }
+}
